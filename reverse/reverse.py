@@ -6,7 +6,15 @@ class Node:
         self.next_node = next_node
 
     def __str__(self):
-        return f"{self.value}"
+        # if self.next_node:
+        #     return f"{self.value} --> {self.next_node.value}"
+        # return f"{self.value} --> {self.next_node}"
+        result = ""
+        if self.next_node:
+            result += f"{self.value} --> {self.next_node.value}"
+        else:
+            result += f"{self.value} --> None"
+        return result
 
     def get_value(self):
         return self.value
@@ -16,6 +24,7 @@ class Node:
 
     def set_next(self, new_next):
         # set this node's next_node reference to the passed in node
+        print(self, new_next)
         self.next_node = new_next
 
 
@@ -28,7 +37,7 @@ class LinkedList:
         current = self.head
         result = ""
         while current:
-            result += f"({current} ==> {current.get_next()}),"
+            result += f"({current}),"
             current = current.get_next()
         return result
 
@@ -56,10 +65,22 @@ class LinkedList:
 
     def reverse_list(self):
         # TO BE COMPLETED
-        current_node = self.head
-        if current_node:
-            current_node = current_node.next_node
-        return self
+        if not self.head or not self.head.next_node:
+            return self
+
+        previous = None
+        current = self.head
+        new = current.next_node
+        current.set_next(None)
+        while new != None:
+            print(current, new, previous)
+            previous = current
+            current = new
+            new = current.next_node
+            current.set_next(previous)
+            print("Current: ", current, "Previous: ", previous)
+
+        return current
 
 
 linked_list = LinkedList()
@@ -67,9 +88,11 @@ linked_list = LinkedList()
 linked_list.add_to_head(1)
 linked_list.add_to_head(2)
 linked_list.add_to_head(3)
-linked_list.add_to_head(4)
-linked_list.add_to_head(5)
+# linked_list.add_to_head(4)
+# linked_list.add_to_head(5)
 
-print(linked_list.reverse_list())
+print("Original list: ", linked_list)
 
-print(linked_list)
+(linked_list.reverse_list())
+
+print("Reversed list: ", linked_list)
