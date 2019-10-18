@@ -18,6 +18,7 @@ f.close()
 #         if name_1 == name_2:
 #             duplicates.append(name_1)
 
+# Using BST
 names_1_bst = BinarySearchTree(names_1[0])
 for name in names_1:
     names_1_bst.insert(name)
@@ -26,6 +27,18 @@ duplicates = []
 for name_2 in names_2:
     if names_1_bst.contains(name_2):
         duplicates.append(name_2)
+
+# Seems to be faster, but less in the spirit of the lessons of the week
+# names_1_dict = {name: True for name in names_1}
+
+# duplicates = []
+# for name_2 in names_2:
+#     if name_2 in names_1_dict:
+#         duplicates.append(name_2)
+
+# Lists only
+# Not sure yet!
+
 
 end_time = time.time()
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
