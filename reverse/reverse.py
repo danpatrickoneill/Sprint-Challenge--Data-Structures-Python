@@ -24,7 +24,6 @@ class Node:
 
     def set_next(self, new_next):
         # set this node's next_node reference to the passed in node
-        print(self, new_next)
         self.next_node = new_next
 
 
@@ -73,12 +72,15 @@ class LinkedList:
         new = current.next_node
         current.set_next(None)
         while new != None:
-            print(current, new, previous)
+            # print(current, new, previous)
             previous = current
             current = new
             new = current.next_node
-            current.set_next(previous)
-            print("Current: ", current, "Previous: ", previous)
+            print("Current: ", current, "Previous: ", previous, "New: ", new)
+            # Next line not necessary anymore
+            # current.set_next(previous)
+            # I don't like this next line but it made things work
+            self.add_to_head(current.value)
 
         return current
 
@@ -88,8 +90,8 @@ linked_list = LinkedList()
 linked_list.add_to_head(1)
 linked_list.add_to_head(2)
 linked_list.add_to_head(3)
-# linked_list.add_to_head(4)
-# linked_list.add_to_head(5)
+linked_list.add_to_head(4)
+linked_list.add_to_head(5)
 
 print("Original list: ", linked_list)
 
