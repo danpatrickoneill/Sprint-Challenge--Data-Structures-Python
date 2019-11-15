@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -22,23 +23,35 @@ f.close()
 # print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 # print(f"runtime: {end_time - start_time} seconds")
 
-# Stretch solution
-
+# BST solution
 duplicates = []
-names_1.sort()
-names_2.sort()
-index_1 = 0
-index_2 = 0
-while index_1 < len(names_1) and index_2 < len(names_2):
-    if names_1[index_1] == names_2[index_2]:
-        duplicates.append(names_1[index_1])
-        index_1 += 1
-        index_2 += 1
-    elif names_1[index_1] <= names_2[index_2]:
-        index_1 += 1
-    else:
-        index_2 += 1
+names_1_tree = BinarySearchTree(names_1[0])
+for i in range(1, len(names_1)):
+    names_1_tree.insert(names_1[i])
+for name in names_2:
+    if names_1_tree.contains(name):
+        duplicates.append(name)
 
 end_time = time.time()
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 print(f"runtime: {end_time - start_time} seconds")
+
+# Stretch solution
+# duplicates = []
+# names_1.sort()
+# names_2.sort()
+# index_1 = 0
+# index_2 = 0
+# while index_1 < len(names_1) and index_2 < len(names_2):
+#     if names_1[index_1] == names_2[index_2]:
+#         duplicates.append(names_1[index_1])
+#         index_1 += 1
+#         index_2 += 1
+#     elif names_1[index_1] <= names_2[index_2]:
+#         index_1 += 1
+#     else:
+#         index_2 += 1
+
+# end_time = time.time()
+# print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+# print(f"runtime: {end_time - start_time} seconds")
