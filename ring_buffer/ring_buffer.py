@@ -11,7 +11,7 @@ class RingBuffer:
             self.current = 0
 
     def get(self):
-        return [item for item in self.storage if item]
+        return [item for item in self.storage if item is not None]
 
 
 if __name__ == "__main__":
