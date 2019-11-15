@@ -10,12 +10,34 @@ f = open('names_2.txt', 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-names_one = {name: 1 for name in names_1}
+# MVP solution
+# names_one = {name: 1 for name in names_1}
+
+# duplicates = []
+# for name_2 in names_2:
+#     if name_2 in names_one:
+#         duplicates.append(name_2)
+
+# end_time = time.time()
+# print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+# print(f"runtime: {end_time - start_time} seconds")
+
+# Stretch solution
 
 duplicates = []
-for name_2 in names_2:
-    if name_2 in names_one:
-        duplicates.append(name_2)
+names_1.sort()
+names_2.sort()
+index_1 = 0
+index_2 = 0
+while index_1 < len(names_1) and index_2 < len(names_2):
+    if names_1[index_1] == names_2[index_2]:
+        duplicates.append(names_1[index_1])
+        index_1 += 1
+        index_2 += 1
+    elif names_1[index_1] <= names_2[index_2]:
+        index_1 += 1
+    else:
+        index_2 += 1
 
 end_time = time.time()
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
